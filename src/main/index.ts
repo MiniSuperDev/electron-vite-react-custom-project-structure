@@ -19,6 +19,10 @@ process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL
   ? join(process.env.DIST_ELECTRON, '../public')
   : process.env.DIST
 
+console.log('process.env.DIST_ELECTRON', process.env.DIST_ELECTRON)
+console.log('process.env.DIST', process.env.DIST)
+console.log('process.env.VITE_PUBLIC', process.env.VITE_PUBLIC)
+
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
 
@@ -55,7 +59,8 @@ async function createWindow() {
     },
   })
 
-  if (url) { // electron-vite-vue#298
+  if (url) {
+    // electron-vite-vue#298
     win.loadURL(url)
     // Open devTool if the app is not packaged
     win.webContents.openDevTools()
@@ -118,4 +123,3 @@ ipcMain.handle('open-win', (_, arg) => {
     childWindow.loadFile(indexHtml, { hash: arg })
   }
 })
-
